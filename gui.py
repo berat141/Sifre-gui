@@ -5,7 +5,7 @@ def flat(array):
        res = "" 
        for item in array:
               res = res + item
-       return res       
+       return res      
 
 
 global input;
@@ -16,32 +16,49 @@ sifre = []
 currentState = ["1"]
 
 def handle_1():
-       input.append("1")
-       label.config(text=flat(input)) 
+      if check():
+          input.append("1")
+          label.config(text=flat(input)) 
+          
 def handle_2():
-       input.append("2")
-       label.config(text=flat(input))
+      if check():
+          input.append("2")
+          label.config(text=flat(input)) 
+          
 def handle_3():
-       input.append("3")
-       label.config(text=flat(input))
+      if check():
+          input.append("3")
+          label.config(text=flat(input)) 
+          
 def handle_4():
-       input.append("4")
-       label.config(text=flat(input))
+      if check():
+          input.append("4")
+          label.config(text=flat(input)) 
+          
 def handle_5():
-       input.append("5")
-       label.config(text=flat(input))
+      if check():
+          input.append("5")
+          label.config(text=flat(input)) 
+
 def handle_6():
-       input.append("6")
-       label.config(text=flat(input))
+      if check():
+          input.append("6")
+          label.config(text=flat(input)) 
+
 def handle_7():
-       input.append("7")
-       label.config(text=flat(input))
+      if check():
+          input.append("7")
+          label.config(text=flat(input)) 
+
 def handle_8():
-       input.append("8")
-       label.config(text=flat(input))  
+      if check():
+          input.append("8")
+          label.config(text=flat(input)) 
+
 def handle_9():
-      input.append("9")
-      label.config(text=flat(input))
+      if check():
+          input.append("9")
+          label.config(text=flat(input)) 
 
 def btn_sifreOlustur():
        def cb():
@@ -54,6 +71,7 @@ def btn_sifreOlustur():
               return
        currentState.clear()
        currentState.append("1")
+      # print(currentState)
        label.config(text="Şifre oluşturun")
 
 def btn_sifreGir():
@@ -61,8 +79,30 @@ def btn_sifreGir():
        currentState.append("0")
        input.clear()
        label.config(text="Şifre girin!")
+       #print(sifre)
+       #print(currentState)
+
+def btn_geri():
+       try:
+         input.pop()
+         label.config(text=flat(input))
+       except:
+         return;
+def check():
+       def cb():
+              resetErrorMsg()
+       if(len(input)+1 == 11):
+          errorMsg.config(text="ŞİFRENİZ EN FAZLA 10 KARAKTER İÇEREBİLİR!",bg="#EA2027")
+          errorMsg.grid()
+          errorMsg.after(2000,cb)
+          return False
+       else:
+          return True 
        
 def enter():
+      #print(sifre)
+      #print(currentState)
+     # print(int(flat(currentState)) == 1)
       if int(flat(currentState)) == 1:
         def cb():
               resetErrorMsg()
@@ -114,14 +154,18 @@ errorMsg.grid(padx=850,pady=200)
 errorMsg.grid_remove()
 
 
-label = Label(root,bd=10,relief=GROOVE,width=60,text="Şifre Oluşturun")
+label = Label(root,bd=10,relief=GROOVE,width=60,text="Şifre girin!")
 label.place(height=100,width=300,x=500,y=20)
 
 button = Button(root,relief=FLAT,bg="#ff7979",text="ENTER",width=40,activebackground="#ff7979",command=enter)
 button.place(height=50,width=300,x=500,y=125)
 
 reset = Button(root,relief=FLAT,text="Var olan şifreyi sil",bg="#EA2027",activebackground="#EA2027",command=delete)
-reset.place(height=50,width=125,x=925,y=50)
+reset.place(height=50,width=125,x=997,y=50)
+
+geri = Button(root,relief=FLAT,text="<-- Geri",bg="#5f27cd",activebackground="#5f27cd",command=btn_geri)
+geri.place(height=50,width=125,x=850,y=50)
+
 
 sifre_olustur = Button(root,relief=FLAT,bg="#3ae374",text="ŞİFRE OLUŞTUR",activebackground="#3ae374",command=btn_sifreOlustur)
 sifre_olustur.place(height=50,width=125,x=850,y=125)
