@@ -1,5 +1,5 @@
 from tkinter import *    
-
+import re
    
 def flat(array):
        res = "" 
